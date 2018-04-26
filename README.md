@@ -3,18 +3,19 @@ Project for pallinda
 
 General Idea: Tank Trouble... But better. Game can be found [here](https://tanktrouble.com/).
 
-###Background:
-Each player gets a tank and the aim is to destroy the other players’ tanks. Every tank has a limited amount of bullets. Once the bullets have bounced 4-5 times the tank will regain its ammunition. 
+### Background:
+Each player gets a tank and the aim is to destroy the other players’ tanks. Every tank has a limited amount of bullets. Once the bullets have bounced 4-5 times the tank will regain its ammunition.
 
-###Ideas:
+### Ideas:
 
-How to win
-First team/player to kill the other team/player
-Point based (everytime you win a game) 
-First to 10 points wins.
+### How to win
+1. First team/player to kill the other team/player
+2. Point based (everytime you win a game)
+3. First to 10 points wins.
 
-Powerups - Boost or sabotage
-Objects on the map that can be collected 
+### Powerups - Boost or sabotage
+
+** Objects on the map that can be collected**
 1. Speed
 2. Slow down the opponent
 3. More shots
@@ -22,29 +23,23 @@ Objects on the map that can be collected
 5. Faster/slower shots
 6. Heat seeking missile
 
-3 /6/9 points streak
-1. Random power-up next round. 
+** 3/6/9 points streak **
 
-Game Mode
-1 Vs 1 
-2 vs 2
-Drone mode 
+1. Random power-up next round.
 
-Map
-3 standard maps
-Random maps - quick game
+### Game Mode
+1. 1 Vs 1
+2. 2 vs 2
+3. Drone mode
 
-
-Graphics 
-
-Interface
-Settings
-Main menu
-Quit
+### Map
+1. 3 standard maps
+2. Random maps - quick game
 
 
+### Graphics
 
-
-Logic
-
-
+### Interface
+1. Settings
+2. Main menu
+3. Quit
