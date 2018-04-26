@@ -15,7 +15,7 @@ Each player gets a tank and the aim is to destroy the other players’ tanks. Ev
 
 ### Powerups - Boost or sabotage
 
-** Objects on the map that can be collected **
+**Objects on the map that can be collected**
 
 1. Speed
 2. Slow down the opponent
@@ -24,7 +24,7 @@ Each player gets a tank and the aim is to destroy the other players’ tanks. Ev
 5. Faster/slower shots
 6. Heat seeking missile
 
-** 3/6/9 points streak **
+**3/6/9 points streak**
 
 1. Random power-up next round.
 
