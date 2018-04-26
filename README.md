@@ -15,7 +15,8 @@ Each player gets a tank and the aim is to destroy the other players’ tanks. Ev
 
 ### Powerups - Boost or sabotage
 
-** Objects on the map that can be collected**
+** Objects on the map that can be collected **
+
 1. Speed
 2. Slow down the opponent
 3. More shots
