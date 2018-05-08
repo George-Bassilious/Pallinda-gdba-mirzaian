@@ -37,13 +37,6 @@ public class Tank {
     }
     public void setAngle(double angle1){
         angle=Math.abs(angle1+360)%360;
-        //  if(angle >=360){
-
-        // }
-
-        //       || angle <=360){
-        //angle=angle%360;
-        //}
 
     }
 
