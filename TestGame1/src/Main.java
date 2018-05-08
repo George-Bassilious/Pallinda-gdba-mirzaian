@@ -11,11 +11,17 @@ import org.newdawn.slick.geom.Transform;
 
 public class Main extends BasicGame
 {
-    Tank player= new Tank(200,200,4,0);
+
+
+    int x1=100;
+    int y1=100;
+
+    Tank player= new Tank(x1,y1,4,0);
     Image img ;
     float turn=0;
 
-    float angle2;
+
+    boolean r= false;
 
     Rectangle s;
     Transform T= new Transform();
@@ -34,7 +40,7 @@ public class Main extends BasicGame
         //  provider.bindCommand(new KeyControl(Input.KEY_SPACE), move);
 
         img = new Image("/home/georgeb/courses/projinda/TestGame1/images/GreenTank2.jpg");
-        s=new Rectangle(player.getxCoord(),player.getyCoord(),10,100);
+
     }
 
     @Override
@@ -79,8 +85,12 @@ public class Main extends BasicGame
         if(input.isKeyDown(Input.KEY_DOWN)){
             player.move(-1,player.angle);
         }
-        img.rotate(turn);
+        if(input.isKeyDown(Input.KEY_R)){
+            if(!r) r=true;
+            else r=false;
+        }
 
+        img.rotate(turn);
         turn=0;
 
 
@@ -93,24 +103,37 @@ public class Main extends BasicGame
     {
 
 
+      //  double x= (player.getxCoord()-x1);
+       // double y= (player.getyCoord()-y1);
+       // if(r)
+       // System.out.println("x: "+ x+ " y: "+y);
 
 
-        Shape shape = s.transform(Transform.createRotateTransform((float) Math.toRadians(angle2),s.getCenterX(),s.getCenterY()));
+    // s=new Rectangle(player.getxCoord(),player.getyCoord(),10,100);
 
-        s.transform(T.createRotateTransform(20));
+      //  Shape shape = s.transform(Transform.createRotateTransform((float) Math.toRadians(player.getAngle()),s.getCenterX(),s.getCenterY()));
 
-        g.draw(shape);
+        //g.draw(shape);
 
-        //   g.drawLine(100,100,100,200);
+        for(int x=0;x<550;x+=50){
+            g.drawLine(x,0,x,500);
+        }
+        for(int y=0;y<500;y+=50){
+            g.drawLine(0,y,500,y);
+        }
+        g.drawLine(600,100,650+Math.round(Math.cos(player.getAngle())),150+Math.round(Math.sin(player.getAngle())));
 
         img.draw(player.xCoord, player.yCoord, 1);
+
+        //g.drawLine(150,100,150,500);
+
+      //g.drawLine(200,100,200,500);
+
+
 
         // g.drawImage(img,player.xCoord,player.yCoord);
 
         //  g.drawImage(img,100,100);
-
-
-
 
     }
 
