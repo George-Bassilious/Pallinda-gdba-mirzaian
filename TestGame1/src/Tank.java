@@ -63,20 +63,20 @@ public class Tank {
         //  System.out.println(getAngle());
         if(x >= 0 && x < 90){
             //  System.out.println(getAngle()+" case 1 cos:"+Math.cos(getAngle())+" sin: "+Math.sin(getAngle()));
-            xCoord-= xChange*0.8f;
-            yCoord-= yChange*0.8f;
+            xCoord-= xChange*0.4f;
+            yCoord-= yChange*0.4f;
         }
         else if (x >= 90 && x < 180) {
-            xCoord += xChange*0.8f;
-            yCoord -= yChange*0.8f;
+            xCoord += xChange*0.4f;
+            yCoord -= yChange*0.4f;
         }
         else if( x >= 180 && x < 270) {
-            xCoord += xChange*0.8f;
-            yCoord += yChange*0.8f;
+            xCoord += xChange*0.4f;
+            yCoord += yChange*0.4f;
         }
         else if(x >= 270 && x < 360) {
-            xCoord-= xChange*0.8f;
-            yCoord+= yChange*0.8f;
+            xCoord-= xChange*0.4f;
+            yCoord+= yChange*0.4f;
         }
 
 
