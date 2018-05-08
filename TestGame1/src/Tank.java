@@ -33,17 +33,17 @@ public class Tank {
     }
 
     public void setxCoord(int x){
-       xCoord=x;
+        xCoord=x;
     }
     public void setAngle(double angle1){
         angle=Math.abs(angle1+360)%360;
-      //  if(angle >=360){
+        //  if(angle >=360){
 
-       // }
+        // }
 
-         //       || angle <=360){
-          //angle=angle%360;
-          //}
+        //       || angle <=360){
+        //angle=angle%360;
+        //}
 
     }
 
@@ -60,23 +60,23 @@ public class Tank {
         double x = angle;
         double xChange=Math.abs(Math.cos(x))*direction;
         double yChange= Math.abs(Math.sin(x))*direction;
-      
+        //  System.out.println(getAngle());
         if(x >= 0 && x < 90){
-          //  System.out.println(getAngle()+" case 1 cos:"+Math.cos(getAngle())+" sin: "+Math.sin(getAngle()));
-            xCoord-= xChange;
-            yCoord-= yChange;
+            //  System.out.println(getAngle()+" case 1 cos:"+Math.cos(getAngle())+" sin: "+Math.sin(getAngle()));
+            xCoord-= xChange*0.8f;
+            yCoord-= yChange*0.8f;
         }
         else if (x >= 90 && x < 180) {
-            xCoord += xChange;
-            yCoord -= yChange;
+            xCoord += xChange*0.8f;
+            yCoord -= yChange*0.8f;
         }
         else if( x >= 180 && x < 270) {
-            xCoord += xChange;
-            yCoord += yChange;
+            xCoord += xChange*0.8f;
+            yCoord += yChange*0.8f;
         }
         else if(x >= 270 && x < 360) {
-            xCoord-= xChange;
-            yCoord+= yChange;
+            xCoord-= xChange*0.8f;
+            yCoord+= yChange*0.8f;
         }
 
 
