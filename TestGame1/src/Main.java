@@ -16,6 +16,7 @@ public class Main extends BasicGame
     float turn=0;
 
     float angle2;
+    // Testa att det inte fuckar
 
     Rectangle s;
     Transform T= new Transform();
