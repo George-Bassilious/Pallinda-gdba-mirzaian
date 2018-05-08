@@ -60,7 +60,7 @@ public class Tank {
         double x = angle;
         double xChange=Math.abs(Math.cos(x))*direction;
         double yChange= Math.abs(Math.sin(x))*direction;
-      //  System.out.println(getAngle());
+      
         if(x >= 0 && x < 90){
           //  System.out.println(getAngle()+" case 1 cos:"+Math.cos(getAngle())+" sin: "+Math.sin(getAngle()));
             xCoord-= xChange;
