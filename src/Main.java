@@ -41,7 +41,7 @@ public class Main extends BasicGame
         //  provider.addListener(this);
         //  provider.bindCommand(new KeyControl(Input.KEY_SPACE), move);
 
-        img = new Image("/home/georgeb/courses/projinda/TestGame1/images/GreenTank2.jpg");
+        img = new Image("/images/GreenTank2.jpg");
 
     }
 
