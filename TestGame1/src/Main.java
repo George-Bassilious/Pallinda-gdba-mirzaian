@@ -35,7 +35,7 @@ public class Main extends BasicGame
       //  InputProvider provider = new InputProvider(gc.getInput());
       //  provider.addListener(this);
       //  provider.bindCommand(new KeyControl(Input.KEY_SPACE), move);
-     img = new Image("/home/georgeb/courses/projinda/TestGame1/images/GreenTank2.jpg");
+     img = new Image("/Users/peppercake/java/projinda18-gdba-mirzaian/TestGame1/images/GreenTank2.jpg");
 s=new Rectangle(x1,y1,10,100);
     }
 
