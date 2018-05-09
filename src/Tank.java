@@ -49,10 +49,8 @@ public class Tank {
     }
     public void move(int direction,double angle){
 
-        // fuck u git
-
-        double xChange= Math.cos(angle)*direction;
-        double yChange= Math.sin(angle)*direction;
+        double xChange= Math.cos(Math.toRadians(angle))*direction;
+        double yChange= Math.sin(Math.toRadians(angle))*direction;
 
         xCoord+= xChange;
         yCoord+= yChange;
