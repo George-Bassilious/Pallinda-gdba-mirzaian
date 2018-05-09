@@ -20,14 +20,6 @@ public class Main extends BasicGame
     Image img ;
     float turn=0;
 
-    float angle2;
-    // Testa att det inte fuckar
-    boolean r= false;
-
-
-    Rectangle s;
-    Transform T= new Transform();
-
 
     public Main(String gamename)
     {
@@ -40,7 +32,6 @@ public class Main extends BasicGame
         //  InputProvider provider = new InputProvider(gc.getInput());
         //  provider.addListener(this);
         //  provider.bindCommand(new KeyControl(Input.KEY_SPACE), move);
-
         img = new Image("/images/GreenTank2.jpg");
 
     }
@@ -49,51 +40,41 @@ public class Main extends BasicGame
     public void update(GameContainer gc, int i) throws SlickException {
 
 
-        // player.setAngle(player.angle+=i*0.03f);
-
-
-
-        // img.draw(player.xCoord,player.yCoord);
-        // img.draw(player.xCoord, player.yCoord, 1);
-
-        // player.move();
         Input input = gc.getInput();
         if(input.isKeyDown(Input.KEY_LEFT)){
             turn-=1;
-            player.setAngle(player.angle-=1);
+            img.rotate(turn);
+            turn=0;
 
-            //  angle2--;
+            player.setAngle(img.getRotation());
 
         }
 
         if(input.isKeyDown(Input.KEY_RIGHT)){
             turn+=1;
-            player.setAngle(player.angle+=1);
-            // test1=player.getAngle();
-            //  angle2++;
+
+            img.rotate(turn);
+            turn=0;
+         //   System.out.println(img.getRotation());
+            System.out.println(player.getxCoord()+" y: "+player.getyCoord());
+            player.setAngle(img.getRotation());
+            System.out.println(player.getAngle());
+
 
         }
         if(input.isKeyDown(Input.KEY_UP)){
-            //   System.out.println(img.getRotation());
-            //     System.out.println(player.getAngle());
-            //  move(1);
+
+            player.setAngle(img.getRotation());
             player.move(1,player.getAngle());
-            //  test2=player.getAngle();
-            //  if(test1==test2) System.out.println("WOrks");
-            //else System.out.println("not works");
+
+
 
 
         }
         if(input.isKeyDown(Input.KEY_DOWN)){
-            player.move(-1,player.angle);
-        }
-        if(input.isKeyDown(Input.KEY_R)){
-            if(!r) r=true;
-            else r=false;
+            player.move(-1,img.getRotation());
         }
 
-        img.rotate(turn);
-        turn=0;
 
 
 
@@ -105,37 +86,24 @@ public class Main extends BasicGame
     {
 
 
-      //  double x= (player.getxCoord()-x1);
-       // double y= (player.getyCoord()-y1);
-       // if(r)
-       // System.out.println("x: "+ x+ " y: "+y);
-
-
-    // s=new Rectangle(player.getxCoord(),player.getyCoord(),10,100);
-
-      //  Shape shape = s.transform(Transform.createRotateTransform((float) Math.toRadians(player.getAngle()),s.getCenterX(),s.getCenterY()));
-
-        //g.draw(shape);
-
         for(int x=0;x<550;x+=50){
             g.drawLine(x,0,x,500);
         }
         for(int y=0;y<500;y+=50){
             g.drawLine(0,y,500,y);
         }
-        g.drawLine(600,100,650+Math.round(Math.cos(player.getAngle())),150+Math.round(Math.sin(player.getAngle())));
+        g.drawLine(600,100,100+Math.round(Math.cos(player.getAngle())),100+Math.round(Math.sin(player.getAngle())));
+
+
+         Shape s=new Rectangle(player.getxCoord(),player.getyCoord(),10,100);
+
+          Shape shape = s.transform(Transform.createRotateTransform((float) Math.toRadians(player.getAngle()),s.getCenterX(),s.getCenterY()));
+
+        g.draw(shape);
 
         img.draw(player.xCoord, player.yCoord, 1);
 
-        //g.drawLine(150,100,150,500);
 
-      //g.drawLine(200,100,200,500);
-
-
-
-        // g.drawImage(img,player.xCoord,player.yCoord);
-
-        //  g.drawImage(img,100,100);
 
     }
 
