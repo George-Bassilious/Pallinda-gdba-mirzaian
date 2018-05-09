@@ -55,10 +55,7 @@ public class Main extends BasicGame
 
             img.rotate(turn);
             turn=0;
-         //   System.out.println(img.getRotation());
-            System.out.println(player.getxCoord()+" y: "+player.getyCoord());
             player.setAngle(img.getRotation());
-            System.out.println(player.getAngle());
 
 
         }
@@ -67,16 +64,10 @@ public class Main extends BasicGame
             player.setAngle(img.getRotation());
             player.move(1,player.getAngle());
 
-
-
-
         }
         if(input.isKeyDown(Input.KEY_DOWN)){
             player.move(-1,img.getRotation());
         }
-
-
-
 
     }
 
