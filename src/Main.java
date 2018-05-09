@@ -32,8 +32,7 @@ public class Main extends BasicGame
         //  InputProvider provider = new InputProvider(gc.getInput());
         //  provider.addListener(this);
         //  provider.bindCommand(new KeyControl(Input.KEY_SPACE), move);
-
-        img = new Image("images/GreenTank2.jpg");
+        img = new Image("/images/GreenTank2.jpg");
 
     }
 
