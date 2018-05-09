@@ -11,8 +11,6 @@ import org.newdawn.slick.geom.Transform;
 
 public class Main extends BasicGame
 {
-
-
     int x1=100;
     int y1=100;
 
@@ -39,10 +37,9 @@ public class Main extends BasicGame
     @Override
     public void update(GameContainer gc, int i) throws SlickException {
 
-
         Input input = gc.getInput();
         if(input.isKeyDown(Input.KEY_LEFT)){
-            turn-=1;
+            turn-=1*0.4f;
             img.rotate(turn);
             turn=0;
 
@@ -51,32 +48,31 @@ public class Main extends BasicGame
         }
 
         if(input.isKeyDown(Input.KEY_RIGHT)){
-            turn+=1;
-
+            turn+=1*0.4f;
             img.rotate(turn);
-            turn=0;
+            turn = 0;
             player.setAngle(img.getRotation());
+            System.out.println(player.getAngle());
+            System.out.println("x:" + player.getxCoord());
+            System.out.println("y:" + player.getyCoord());
 
 
         }
         if(input.isKeyDown(Input.KEY_UP)){
 
             player.setAngle(img.getRotation());
-            player.move(1,player.getAngle());
+            player.move(-1,player.getAngle());
+
 
         }
         if(input.isKeyDown(Input.KEY_DOWN)){
-            player.move(-1,img.getRotation());
+            player.move(1,img.getRotation());
         }
-
     }
-
 
     @Override
     public void render(GameContainer gc, Graphics g) throws SlickException
     {
-
-
         for(int x=0;x<550;x+=50){
             g.drawLine(x,0,x,500);
         }
@@ -86,19 +82,8 @@ public class Main extends BasicGame
         g.drawLine(600,100,100+Math.round(Math.cos(player.getAngle())),100+Math.round(Math.sin(player.getAngle())));
 
 
-         Shape s=new Rectangle(player.getxCoord(),player.getyCoord(),10,100);
-
-          Shape shape = s.transform(Transform.createRotateTransform((float) Math.toRadians(player.getAngle()),s.getCenterX(),s.getCenterY()));
-
-        g.draw(shape);
-
         img.draw(player.xCoord, player.yCoord, 1);
-
-
-
     }
-
-
 
     public static void main(String[] args)
     {
