@@ -12,17 +12,20 @@ import org.newdawn.slick.geom.Transform;
 
 public class Main extends BasicGame
 {
-   float x1=100;
+    float x1=100;
     float y1=100;
 
     Tank player= new Tank(100,100,4,0);
     Image img ;
+    Image cannon;
     float turn=0;
-    Shape currentS;
+    cannonBall currentS;
     boolean move=false;
 
+    cannonBall r= new cannonBall(100,100,10);
     float xChange=0;
     float yChange=0;
+    Sound sound;
 
 
     public Main(String gamename)
@@ -37,7 +40,9 @@ public class Main extends BasicGame
         //  provider.addListener(this);
         //  provider.bindCommand(new KeyControl(Input.KEY_SPACE), move);
         img = new Image("/images/GreenTank2.jpg");
-        currentS= new Circle(x1, y1, 10);
+        cannon= new Image("images/canonball.jpg");
+       // currentS= new cannonBall(x1, y1, 10);
+        sound = new Sound("sound/sound.ogg");
 
     }
 
@@ -66,55 +71,67 @@ public class Main extends BasicGame
 
             player.setAngle(img.getRotation());
             player.move(-1, player.getAngle());
+            //movement.play(1,1);
 
 
         }
+       // if(input.isKeyPressed(Input.KEY_UP)) movement.stop();
         if (input.isKeyDown(Input.KEY_DOWN)) {
             player.move(1, img.getRotation());
 
         }
         if (input.isKeyPressed(Input.KEY_SPACE)) {
             // player.getBall().move(player.getAngle());
-            if (player.getAmmosize() != 0&&!move) {
+            if (player.getAmmosize() != 0 && !move) {
 
                 player.shoot();
+                sound.play(1,100);
 
-                xChange = (float) Math.cos(Math.toRadians(player.getAngle()));
-                yChange = (float) Math.sin(Math.toRadians(player.getAngle()));
 
-                move=true;
+               // xChange = (float) Math.cos(Math.toRadians(player.getAngle()));
+              //  yChange = (float) Math.sin(Math.toRadians(player.getAngle()));
+
+                player.getBall().setMove(true);
+                //move=true;
                 System.out.println("pang");
             }
 
         }
         if (input.isKeyPressed(Input.KEY_C)) {
-            move=false;
+            //move=false;
             x1 = ( player.getxCoord() + img.getWidth() / 2) +(xChange*100);
             y1 = (player.getyCoord() + img.getHeight() / 2)+(yChange*100);
             currentS = new cannonBall(x1, y1, 10);
-            player.addBall(new cannonBall(600, 100 + 10 * player.getAmmosize(), 5));
+
+            player.addBall(new cannonBall(x1,y1,10));
+
+
+
+        //    player.addBall(currentS);
+
+            //player.addBall(new cannonBall(600, 100 + 10 * player.getAmmosize(), 5));
         }
 
+        if(player.getAmmosize()!=0)
+        if (player.getBall().getMove()){
 
-        if (move){
+        player.getBall().move(player.getAngle());
 
-        x1 -= xChange * 0.4f;
-        y1 -= yChange * 0.4f;
-        currentS.setY(y1);
-        currentS.setX(x1);
-        if(y1 > 450 || x1 > 600 || x1 <0|| y1<0){
-            move=false;
+        cannonBall r= player.getBall();
+
+        if(r.getyCoord() > 450 || r.getxCoord()> 600 || r.getxCoord() <0|| r.getyCoord()<0){
+            player.getBall().setMove(false);
             //if(player.getAmmosize()!=0){
-                x1 = player.getxCoord() + img.getWidth() / 2;
-                y1 = player.getyCoord() + img.getHeight() / 2;
-                currentS = new cannonBall(x1, y1, 10);
+            // x1 = player.getxCoord() + img.getWidth() / 2;
+            //y1 = player.getyCoord() + img.getHeight() / 2;
+                //currentS = new cannonBall(x1, y1, 10);
            // }
         }
 
     }else {
-            x1 = player.getxCoord() + img.getWidth() / 2;
-            y1 = player.getyCoord() + img.getHeight() / 2;
-            currentS = new cannonBall(x1, y1, 10);
+          //  x1 = player.getxCoord() + img.getWidth() / 2;
+          //  y1 = player.getyCoord() + img.getHeight() / 2;
+          //  currentS = new cannonBall(x1, y1, 10);
         }
 
     }
@@ -135,19 +152,18 @@ public class Main extends BasicGame
       //  g.draw(player.getBall());
 
 
-            if(player.getAmmosize()!=0) {
-              //  currentS =
-             //   Shape t= currentS.transform(Transform.createRotateTransform(1, x1, y1));
+          //  if(player.getAmmosize()!=0) {
 
-                g.draw(currentS);
+            //    g.draw(currentS);
 
-            }
+            //}
 //       g.draw(s);
 
         if(player.getAmmo()!=null) {
             for (cannonBall b : player.getAmmo()) {
-               // b.move(player.getAngle());
-                g.draw(b);
+            //    g.draw(currentS);
+                cannon.draw(b.getxCoord(),b.getyCoord(),0.1f);
+
 
             }
         }
