@@ -141,12 +141,7 @@ public class Main extends BasicGame
     @Override
     public void render(GameContainer gc, Graphics g) throws SlickException
     {
-        for(int x=0;x<550;x+=50){
-            g.drawLine(x,0,x,500);
-        }
-        for(int y=0;y<500;y+=50){
-            g.drawLine(0,y,500,y);
-        }
+
 
 
         img.draw(player.getxCoord(), player.getyCoord(), 1);
