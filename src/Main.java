@@ -17,12 +17,8 @@ public class Main extends BasicGame
     Image img ;
     Image cannon;
     float turn=0;
-    cannonBall currentS;
     boolean move=false;
 
-   // cannonBall r= new cannonBall(100,100,10);
-    float xChange=0;
-    float yChange=0;
     Sound sound;
     double temp=0;
 
