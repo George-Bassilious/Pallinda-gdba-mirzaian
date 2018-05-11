@@ -6,17 +6,27 @@ import java.util.logging.Logger;
 import org.newdawn.slick.*;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
-import org.newdawn.slick.geom.Circle;
+
+import org.newdawn.slick.geom.Rectangle;
+import org.newdawn.slick.geom.Shape;
+import org.newdawn.slick.geom.Transform;
+import org.newdawn.slick.tiled.TiledMap;
 
 public class Main extends BasicGame
 {
-    float x1=100;
-    float y1=100;
+    int x1=32;
+    int y1=32;
+    
+    
+  //  float x1=100;
+  //  float y1=100;
+
 
     Tank player= new Tank(100,100,4,0);
     Image img ;
     Image cannon;
     float turn=0;
+
     boolean move=false;
 
     Sound sound;
@@ -24,6 +34,9 @@ public class Main extends BasicGame
 
     ArrayList<cannonBall> shotBalls= new ArrayList<>();
     private int shotNumber=0;
+
+    private TiledMap map;
+
 
 
     public Main(String gamename)
@@ -34,12 +47,13 @@ public class Main extends BasicGame
     @Override
     public void init(GameContainer gc) throws SlickException {
 
-        //  InputProvider provider = new InputProvider(gc.getInput());
-        //  provider.addListener(this);
-        //  provider.bindCommand(new KeyControl(Input.KEY_SPACE), move);
-        img = new Image("/images/GreenTank2.jpg");
+
+       
         cannon= new Image("images/canonball.jpg");
         sound = new Sound("sound/sound.ogg");
+
+        map = new TiledMap("/Map2/map2.tmx");
+        img = new Image("/images/tank1.png");
 
     }
 
@@ -50,26 +64,23 @@ public class Main extends BasicGame
         if (input.isKeyDown(Input.KEY_LEFT)) {
             turn -= 1 * 0.4f;
             img.rotate(turn);
-            turn = 0;
 
             player.setAngle(img.getRotation());
-
         }
 
         if (input.isKeyDown(Input.KEY_RIGHT)) {
             turn += 1 * 0.4f;
             img.rotate(turn);
             turn = 0;
+
             player.setAngle(img.getRotation());
 
 
         }
-        if (input.isKeyDown(Input.KEY_UP)) {
-
-            player.setAngle(img.getRotation());
-            player.move(-1, player.getAngle());
 
 
+        if(input.isKeyDown(Input.KEY_UP)){
+            player.move(-1, img.getRotation());
 
         }
 
@@ -132,7 +143,10 @@ public class Main extends BasicGame
 
                 }
             }
+
         }
+
+       
 
     }
 
@@ -141,14 +155,17 @@ public class Main extends BasicGame
     @Override
     public void render(GameContainer gc, Graphics g) throws SlickException
     {
+<<<<<<< HEAD
 
 
 
         img.draw(player.getxCoord(), player.getyCoord(), 1);
 
 
+=======
+>>>>>>> 0906779d3c59d89cdc4d7ee099a28553b23c1510
 
-        if(player.getAmmosize()!=0) {
+if(player.getAmmosize()!=0) {
            for (cannonBall b : player.getAmmo()) {
 
                g.draw(b);
@@ -162,6 +179,8 @@ public class Main extends BasicGame
             if(!b.isVisible()) shotBalls.remove(b);
         }
 
+        map.render(0,0);
+        img.draw(player.xCoord, player.yCoord, 0.8f);
 
     }
 
@@ -171,7 +190,7 @@ public class Main extends BasicGame
         {
             AppGameContainer appgc;
             appgc = new AppGameContainer(new Main("Simple Slick Game"));
-            appgc.setDisplayMode(640, 480, false);
+            appgc.setDisplayMode(800, 800, false);
             //  appgc.setShowFPS(false);
             appgc.setVSync(true);
             appgc.start();
