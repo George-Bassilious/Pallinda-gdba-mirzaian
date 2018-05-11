@@ -58,10 +58,13 @@ public class Tank {
     }
     public void shoot(){
 
-        ammoSize--;
-        //check if empty null checks
-       // ammo.get(0).move(angle);
-        ammo.remove(ammoSize);
+        if(ammoSize!=0) {
+            ammoSize--;
+            //check if empty null checks
+            // ammo.get(0).move(angle);
+            ammo.remove(ammoSize);
+        }
+        else System.out.println("error");
 
     }
 
@@ -85,8 +88,8 @@ public class Tank {
         double xChange= Math.cos(Math.toRadians(angle))*direction;
         double yChange= Math.sin(Math.toRadians(angle))*direction;
 
-        xCoord+= xChange*0.4f;
-        yCoord+= yChange*0.4f;
+        xCoord+= xChange*0.3f;
+        yCoord+= yChange*0.3f;
 
 
 
@@ -98,5 +101,9 @@ public class Tank {
 
     public ArrayList<cannonBall> getAmmo() {
         return ammo;
+    }
+
+    public void setAmmoSize(int ammoSize) {
+        this.ammoSize = ammoSize;
     }
 }

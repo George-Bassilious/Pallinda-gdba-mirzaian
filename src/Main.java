@@ -1,4 +1,5 @@
 
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -6,9 +7,6 @@ import org.newdawn.slick.*;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.geom.Circle;
-import org.newdawn.slick.geom.Rectangle;
-import org.newdawn.slick.geom.Shape;
-import org.newdawn.slick.geom.Transform;
 
 public class Main extends BasicGame
 {
@@ -22,10 +20,14 @@ public class Main extends BasicGame
     cannonBall currentS;
     boolean move=false;
 
-    cannonBall r= new cannonBall(100,100,10);
+   // cannonBall r= new cannonBall(100,100,10);
     float xChange=0;
     float yChange=0;
     Sound sound;
+    double temp=0;
+
+    ArrayList<cannonBall> shotBalls= new ArrayList<>();
+    private int shotNumber=0;
 
 
     public Main(String gamename)
@@ -41,7 +43,6 @@ public class Main extends BasicGame
         //  provider.bindCommand(new KeyControl(Input.KEY_SPACE), move);
         img = new Image("/images/GreenTank2.jpg");
         cannon= new Image("images/canonball.jpg");
-       // currentS= new cannonBall(x1, y1, 10);
         sound = new Sound("sound/sound.ogg");
 
     }
@@ -71,70 +72,75 @@ public class Main extends BasicGame
 
             player.setAngle(img.getRotation());
             player.move(-1, player.getAngle());
-            //movement.play(1,1);
+
 
 
         }
-       // if(input.isKeyPressed(Input.KEY_UP)) movement.stop();
+
         if (input.isKeyDown(Input.KEY_DOWN)) {
             player.move(1, img.getRotation());
 
         }
         if (input.isKeyPressed(Input.KEY_SPACE)) {
-            // player.getBall().move(player.getAngle());
+
             if (player.getAmmosize() != 0 && !move) {
 
-                player.shoot();
+
                 sound.play(1,100);
+                temp= player.getAngle();
+
+                x1 = player.getxCoord() + img.getWidth() / 2;
+                y1 = player.getyCoord() + img.getHeight() / 2;
+
+                shotBalls.add(player.getBall());
 
 
-               // xChange = (float) Math.cos(Math.toRadians(player.getAngle()));
-              //  yChange = (float) Math.sin(Math.toRadians(player.getAngle()));
+                shotBalls.get(shotNumber).setxCoord(x1);
+                shotBalls.get(shotNumber).setyCoord(y1);
+                shotBalls.get(shotNumber).setAngle(temp);
+                shotBalls.get(shotNumber).setMove(true);
 
-                player.getBall().setMove(true);
-                //move=true;
-                System.out.println("pang");
+                shotNumber++;
+                player.shoot();
+
             }
 
         }
         if (input.isKeyPressed(Input.KEY_C)) {
-            //move=false;
-            x1 = ( player.getxCoord() + img.getWidth() / 2) +(xChange*100);
-            y1 = (player.getyCoord() + img.getHeight() / 2)+(yChange*100);
-            currentS = new cannonBall(x1, y1, 10);
 
-            player.addBall(new cannonBall(x1,y1,10));
+            player.addBall(new cannonBall(600, 100+20*player.getAmmosize(), 10, player.getAmmosize()));
 
-
-
-        //    player.addBall(currentS);
-
-            //player.addBall(new cannonBall(600, 100 + 10 * player.getAmmosize(), 5));
         }
 
-        if(player.getAmmosize()!=0)
-        if (player.getBall().getMove()){
-
-        player.getBall().move(player.getAngle());
-
-        cannonBall r= player.getBall();
-
-        if(r.getyCoord() > 450 || r.getxCoord()> 600 || r.getxCoord() <0|| r.getyCoord()<0){
-            player.getBall().setMove(false);
-            //if(player.getAmmosize()!=0){
-            // x1 = player.getxCoord() + img.getWidth() / 2;
-            //y1 = player.getyCoord() + img.getHeight() / 2;
-                //currentS = new cannonBall(x1, y1, 10);
-           // }
+        if(input.isKeyPressed(Input.KEY_A)) {
+            shotBalls.clear();
+            shotNumber=0;
+            player.getAmmo().clear();
+            player.setAmmoSize(0);
         }
 
-    }else {
-          //  x1 = player.getxCoord() + img.getWidth() / 2;
-          //  y1 = player.getyCoord() + img.getHeight() / 2;
-          //  currentS = new cannonBall(x1, y1, 10);
+
+        if (!shotBalls.isEmpty())
+        for (cannonBall b: shotBalls) {
+
+
+            if(b.getMove()) {
+                b.move(b.getAngle());
+                b.setVisible(true);
+
+//temporary
+                if (b.getyCoord() > 450 || b.getxCoord() > 600 || b.getxCoord() < 0 || b.getyCoord() < 0) {
+                   // System.out.println("kk"+b.getId());
+                    b.setMove(false);
+
+
+                }
+            }
         }
 
     }
+
+
 
     @Override
     public void render(GameContainer gc, Graphics g) throws SlickException
@@ -148,25 +154,23 @@ public class Main extends BasicGame
 
 
         img.draw(player.getxCoord(), player.getyCoord(), 1);
-        if(player.getAmmosize()!=0)
-      //  g.draw(player.getBall());
 
 
-          //  if(player.getAmmosize()!=0) {
 
-            //    g.draw(currentS);
+        if(player.getAmmosize()!=0) {
+           for (cannonBall b : player.getAmmo()) {
 
-            //}
-//       g.draw(s);
-
-        if(player.getAmmo()!=null) {
-            for (cannonBall b : player.getAmmo()) {
-            //    g.draw(currentS);
-                cannon.draw(b.getxCoord(),b.getyCoord(),0.1f);
-
-
-            }
+               g.draw(b);
+           }
         }
+
+        if (!shotBalls.isEmpty())
+        for(cannonBall b : shotBalls){
+
+            cannon.draw(b.getxCoord(),b.getyCoord(),0.1f);
+            if(!b.isVisible()) shotBalls.remove(b);
+        }
+
 
     }
 
@@ -178,7 +182,9 @@ public class Main extends BasicGame
             appgc = new AppGameContainer(new Main("Simple Slick Game"));
             appgc.setDisplayMode(640, 480, false);
             //  appgc.setShowFPS(false);
+            appgc.setVSync(true);
             appgc.start();
+
         }
         catch (SlickException ex)
         {

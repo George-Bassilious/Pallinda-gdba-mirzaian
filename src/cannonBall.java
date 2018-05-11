@@ -7,17 +7,20 @@ public class cannonBall extends Circle {
     private float xCoord;
     private float yCoord;
     private boolean move;
+    private int id;
+    private double angle;
+private boolean visible;
 
-
-    public cannonBall(float centerPointX, float centerPointY, float radius) {
+    public cannonBall(float centerPointX, float centerPointY, float radius,int id) {
         super(centerPointX, centerPointY, radius);
         xCoord=centerPointX;
         yCoord=centerPointY;
+        this.id=id;
     }
 
 
     public void move(double angle) {
-        System.out.println("f");
+
         double xChange = Math.cos(Math.toRadians(angle));
         double yChange = Math.sin(Math.toRadians(angle));
 
@@ -36,6 +39,18 @@ public class cannonBall extends Circle {
 
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setAngle(double angle) {
+        this.angle = angle;
+    }
+
+    public double getAngle() {
+        return angle;
+    }
+
     public float getxCoord(){
         return xCoord;
     }
@@ -51,6 +66,11 @@ public class cannonBall extends Circle {
     }
 
 
+    public boolean isVisible() {
+        return visible;
+    }
 
-
+    public void setVisible(boolean visible) {
+        this.visible = visible;
+    }
 }
