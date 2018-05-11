@@ -5,9 +5,6 @@ import java.util.logging.Logger;
 import org.newdawn.slick.*;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
-import org.newdawn.slick.geom.Rectangle;
-import org.newdawn.slick.geom.Shape;
-import org.newdawn.slick.geom.Transform;
 import org.newdawn.slick.tiled.TiledMap;
 
 public class Main extends BasicGame
