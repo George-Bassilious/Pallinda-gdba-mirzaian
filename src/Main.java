@@ -50,11 +50,14 @@ public class Main extends BasicGame
         }
 
         if(input.isKeyDown(Input.KEY_UP)){
-            player.move(-1,img.getRotation());
+            player.setAngle(img.getRotation());
+            player.move(-1,player.getAngle());
         }
 
         if(input.isKeyDown(Input.KEY_DOWN)){
-            player.move(1, img.getRotation());
+            player.setAngle(img.getRotation());
+            player.move(1,player.getAngle());
+           // player.move(1, img.getRotation());
         }
     }
 
@@ -62,7 +65,7 @@ public class Main extends BasicGame
     public void render(GameContainer gc, Graphics g) throws SlickException
     {
         map.render(0,0);
-        img.draw(player.xCoord, player.yCoord, 1);
+        img.draw(player.xCoord, player.yCoord, 0.8f);
     }
 
     public static void main(String[] args)
