@@ -3,6 +3,11 @@ import java.lang.Math;
 
 public class Tank {
 
+    public int[] upleft = {0,0};
+    public int[] upright = {90,0};
+    public int[] downleft = {0,60};
+    public int[] downright = {90,60};
+
     public float xCoord;
     public float yCoord;
     public int velocity;
@@ -51,11 +56,9 @@ public class Tank {
 
         double xChange= Math.cos(Math.toRadians(angle))*direction;
         double yChange= Math.sin(Math.toRadians(angle))*direction;
-
-        xCoord+= xChange;
-        yCoord+= yChange;
-
+        this.angle = angle;
+        xCoord+= xChange*0.1f;
+        yCoord+= yChange*0.1f;
 
     }
-
 }
