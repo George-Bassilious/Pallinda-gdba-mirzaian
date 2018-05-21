@@ -65,9 +65,7 @@ public class Main extends BasicGame {
 
     @Override
     public void update(GameContainer gc, int i) throws SlickException {
-        // behövs egentligen inte
-        int collision = map.getLayerIndex("Collision");
-
+        
         Input input = gc.getInput();
       
         if (input.isKeyDown(Input.KEY_LEFT)) {
@@ -82,7 +80,6 @@ public class Main extends BasicGame {
         if (input.isKeyDown(Input.KEY_D)) {
 
             turn(1,player2);
-
 
         }
 
@@ -99,6 +96,14 @@ public class Main extends BasicGame {
         }
         if (input.isKeyDown(Input.KEY_UP)) {
             move(-1, player);
+        }
+
+        if(input.isKeyDown(Input.KEY_UP)){
+                player.move(-1, img.getRotation());
+        }
+
+        if(input.isKeyDown(Input.KEY_DOWN)) {
+                player.move(1, img.getRotation());
         }
 
         if (input.isKeyDown(Input.KEY_DOWN)) {
@@ -121,6 +126,12 @@ public class Main extends BasicGame {
             move = true;
 
         }
+        if (input.isKeyPressed(Input.KEY_V)) {
+
+            move = true;
+
+        }
+
 
         //tank lista med for loops
 
@@ -215,34 +226,20 @@ public class Main extends BasicGame {
 
     public void move(int direction,Tank T){
 
-        if(T.equals(player)){
+        if(T.equals(player)) {
             player.move(direction, img.getRotation());
-=======
-        if(input.isKeyDown(Input.KEY_UP)){
-            if (nextMoveValid(-1,collision)) {
-                player.move(-1, img.getRotation());
 
-                double xChange=  Math.cos(Math.toRadians(img.getRotation()))*-1*0.1f;
-                double yChange=  Math.sin(Math.toRadians(img.getRotation()))*-1*0.1f;
+            double xChange=  Math.cos(Math.toRadians(img.getRotation()))*1*0.1f;
+            double yChange=  Math.sin(Math.toRadians(img.getRotation()))*1*0.1f;
 
-                polygon.setCenterX(polygon.getCenterX() + (float) xChange);
-                polygon.setCenterY(polygon.getCenterY() + (float) yChange);
 
-            }
-        }
+            polygon.setCenterX(polygon.getCenterX() + (float) xChange);
+            polygon.setCenterY(polygon.getCenterY() + (float) yChange);
 
-        if(input.isKeyDown(Input.KEY_DOWN)) {
-            if (nextMoveValid(1,collision)) {
-                player.move(1, img.getRotation());
-
-                double xChange=  Math.cos(Math.toRadians(img.getRotation()))*1*0.1f;
-                double yChange=  Math.sin(Math.toRadians(img.getRotation()))*1*0.1f;
-
-                polygon.setCenterX(polygon.getCenterX() + (float) xChange);
-                polygon.setCenterY(polygon.getCenterY() + (float) yChange);
-            }
 
         }
+
+
         if(T.equals(player2))player2.move(direction,img2.getRotation());
     }
 
@@ -281,6 +278,7 @@ public class Main extends BasicGame {
             //   System.out.println(player.getAmmosize());
                cannonBall b=player.getAmmo(x);
                cannon.draw(b.getxCoord(),b.getyCoord(),0.1f);
+              // g.draw(b);
            }
         }
 
@@ -288,8 +286,8 @@ public class Main extends BasicGame {
             for (int x = 0; x < player2.getAmmosize(); x++) {
 
                 cannonBall b = player2.getAmmo(x);
-               // cannon.draw(b.getxCoord(), b.getyCoord(), 0.1f);
-                    g.draw(b);
+                cannon.draw(b.getxCoord(), b.getyCoord(), 0.1f);
+                  //  g.draw(b);
             }
         }
 
@@ -297,6 +295,11 @@ public class Main extends BasicGame {
 
 
         sidePanel(g);
+
+
+        g.draw(polygon);
+
+
 
 
         img.draw(player.getxCoord(), player.getyCoord(), 1);
@@ -326,16 +329,8 @@ public class Main extends BasicGame {
 
     public void gameover(Tank winner,Graphics g){
 
-        if(winner.equals(player)) g.drawString("Congratulations \n player1 !",820,400);
+        if(winner.equals(player)) g.drawString("Congratulations \n player 1 !",820,400);
         if(winner.equals(player2)) g.drawString("Congratulations player 2 !",820,400);
-
- img.draw(player.xCoord, player.yCoord, 1);
-        g.draw(polygon);
-        g.drawString(String.valueOf(player.getxCoord()), 10 , 25);
-        g.drawString(String.valueOf(player.getyCoord()), 10 , 45);
-        g.drawString(String.valueOf(player.getAngle()),10,65);
-        g.drawString(String.valueOf(polygon.getCenterX()),10,85);
-        g.drawString(Arrays.toString(polygon.getPoints()),10,105);
 
 
     }
