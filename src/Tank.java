@@ -10,6 +10,7 @@ import java.util.ArrayList;
  */
 public class Tank {
 
+
     private float xCoord;
     private float yCoord;
     private double angle;
@@ -19,6 +20,7 @@ public class Tank {
 
     private ArrayList<cannonBall> ammo= new ArrayList<cannonBall>();
     private int ammoSize;
+
 
 
     public Tank(int xCoord,int yCoord,int player,int ammoSize,boolean state){
@@ -105,10 +107,11 @@ public class Tank {
    }
     public void move(int direction,double angle){
 
+
        if(state) {
            double xChange = Math.cos(Math.toRadians(angle)) * direction;
            double yChange = Math.sin(Math.toRadians(angle)) * direction;
-
+           this.angle = angle;
            xCoord += xChange * 3.1f;
            yCoord += yChange * 3.1f;
 
@@ -131,4 +134,5 @@ public class Tank {
     public void setAmmoSize(int ammoSize) {
         this.ammoSize = ammoSize;
     }
+
 }
